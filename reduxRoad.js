@@ -10,7 +10,7 @@ const roadReducer = (state = initialWagonState, action) => {
       return {
         ...state,
         supplies: state.supplies + 15,
-        kilometer: state.distance,
+        distance: state.distance,
         days: state.days + 1,
       };
     }
@@ -21,7 +21,7 @@ const roadReducer = (state = initialWagonState, action) => {
       return {
         ...state,
         supplies: state.supplies - 20 * action.payload,
-        kilometer: state.distance + 10 * action.payload,
+        distance: state.distance + 10 * action.payload,
         days: state.days + action.payload,
       };
     }
@@ -29,7 +29,7 @@ const roadReducer = (state = initialWagonState, action) => {
       return {
         ...state,
         supplies: state.supplies - 30,
-        kilometer: state.distance,
+        distance: state.distance,
         days: state.days + 1,
       };
     }
@@ -37,3 +37,10 @@ const roadReducer = (state = initialWagonState, action) => {
       return state;
   }
 };
+
+let wagon = roadReducer(undefined, {});
+wagon = roadReducer(wagon, { type: "travel", payload: 1 });
+wagon = roadReducer(wagon, { type: "gather", payload: null });
+wagon = roadReducer(wagon, { type: "tippedWagon", payload: null });
+wagon = roadReducer(wagon, { type: "travel", payload: 3 });
+console.log(wagon);
